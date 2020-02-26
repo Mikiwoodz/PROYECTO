@@ -61,6 +61,35 @@ public class Tablero {
 	public String toString() {
 		return  Arrays.toString(t);
 	}
+	
+	public void moverFicha(char x1, int y1, char x2, int y2) {
+		
+		int xOrigen = (int) x1 - 'A';
+		int xDestino = (int) x2 - 'A';
+		int yOrigen= y1-1;
+		int yDestino = y2-1;
+		
+		if(comprobarOrigen(yOrigen,xOrigen)==false)
+			System.out.println("WARNING! En ese origen no se encuentra ninguna ficha");
+		
+		else {
+		
+		t[yDestino][xDestino].setFicha(t[yOrigen][xDestino].getFicha());
+		t[yOrigen][xOrigen].deleteFicha();
+		t[yDestino][xDestino].getFicha().setXY(new Coordenada(yDestino,(char)(xDestino +'A')));
+		}
+	}
+	
+	public boolean comprobarOrigen(int yOrigen, int xOrigen) {
+		
+		if(t[yOrigen][xOrigen].getFicha()==null) 
+			
+			return false;
+		
+		return true;
+	 
+	}
+		
 
 
 	public String  mostrarTableroInicio() {

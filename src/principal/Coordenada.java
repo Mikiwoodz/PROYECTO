@@ -31,7 +31,8 @@ public class Coordenada {
 	
 	public Coordenada up() {
 		
-		return new Coordenada(this.Y-1 ,this.X );
+		return new Coordenada(this.Y-1 ,this.X );   
+		
 	}
 	public Coordenada down() {
 		

@@ -22,6 +22,11 @@ public class Celda {
 	public void setFicha(Fichas ficha) {
 		this.ficha = ficha;
 	}
+	
+	public void deleteFicha() {
+		
+		this.ficha=null;
+	}
 
 
 	public String toString() {
@@ -32,6 +37,8 @@ public class Celda {
 			
 		return  ficha.toString();
 	}
+	  
+	
 	
 
 	

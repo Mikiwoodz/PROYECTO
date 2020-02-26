@@ -27,6 +27,7 @@ public class Knight extends Fichas {
 		else
 			 return FICHA.BLACKKNIGHT.toString();
 	}
+	
 
 	
 }
