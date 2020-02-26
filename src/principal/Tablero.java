@@ -92,6 +92,16 @@ public class Tablero {
 		
 
 
+	public Celda[][] getT() {
+		return t;
+	}
+
+
+	public void setT(Celda[][] t) {
+		this.t = t;
+	}
+
+
 	public String  mostrarTableroInicio() {
 		
 	return  "           A   B   C   D   E   F   G   H\r\n" + 
