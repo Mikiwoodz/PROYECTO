@@ -53,6 +53,7 @@ public class Tablero {
 					int a= 'A' + i;
 				t[6][i].setFicha(new Pawn(COLOR.BLACK , new Coordenada(6, (char) a), this));
 				}
+				
 			
 		
 	}
@@ -133,4 +134,5 @@ public class Tablero {
 			"\r\n" + 
 			"";
 	}
+	
 }

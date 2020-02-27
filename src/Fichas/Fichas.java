@@ -97,7 +97,7 @@ public abstract class Fichas {
 		XY = xY;
 	}
 	
-
+	
 	
 	public String toString() {
 		

@@ -27,11 +27,18 @@ public class Celda {
 		
 		this.ficha=null;
 	}
+	
+	public boolean estaVacio() {
+		
+		if(ficha==null)
+			return true;
+		return false;
+	}
 
 
 	public String toString() {
 		
-		if (ficha==null)
+		if (estaVacio())
 			return " ";
 		else
 			
