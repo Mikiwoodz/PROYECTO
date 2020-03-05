@@ -2,57 +2,63 @@ package principal;
 
 public class Coordenada {
 
+	private char x;
+	private int y;
 	
-
-	private char X;
-	private int Y;
 	
 	public Coordenada( int coordenadaY,char coordenadaX) {
+		
 		super();
-		X = coordenadaX;
-		Y = coordenadaY;
+		x = coordenadaX;
+		y = coordenadaY;
+		
 	}
-
 	public char getCoordenadaX() {
-		return X;
+		
+		return x;
+		
 	}
-
 	public void setCoordenadaX(char coordenadaX) {
-		X = coordenadaX;
+		
+		x = coordenadaX;
+		
 	}
-
 	public int getCoordenadaY() {
-		return Y;
+		
+		return y ;
+		
 	}
-
 	public void setCoordenadaY(int coordenadaY) {
-		Y = coordenadaY;
+		
+		y = coordenadaY;
+		
 	}
-	
 	public Coordenada up() {
 		
-		return new Coordenada(this.Y-1 ,this.X );   
+		return new Coordenada(this.y-1 ,this.x );   
 		
 	}
 	public Coordenada down() {
 		
-		return new Coordenada(this.Y+1 ,this.X );
+		return new Coordenada(this.y+1 ,this.x );
 		
 	}
 	public Coordenada right() {
 		
-		return new Coordenada(this.Y ,(char) (this.X+1) );
+		return new Coordenada(this.y ,(char) (this.x+1) );
 		
 	}
 	
 	public Coordenada left() {
 		
-		return new Coordenada(this.Y ,(char) (this.X-1) );
+		return new Coordenada(this.y ,(char) (this.x-1) );
 	}
 
 	@Override
 	public String toString() {
-		return "("+ X + "," + Y + ")";
+		
+		return "("+ x + "," + y + ")";
+		
 	}
 	
 	

@@ -28,30 +28,30 @@ public class Tablero {
 				t[fil][col]= new Celda();
 				
 			}}
-				t[0][0].setFicha(new Rook(COLOR.WHITE, new Coordenada(0,'A'), this));
-				t[0][1].setFicha(new Knight(COLOR.WHITE, new Coordenada(0,'B'), this));
-				t[0][2].setFicha(new Bishop(COLOR.WHITE, new Coordenada(0,'C'), this));
-				t[0][3].setFicha(new Queen(COLOR.WHITE, new Coordenada(0,'D'), this));
-				t[0][4].setFicha(new King(COLOR.WHITE, new Coordenada(0,'E'), this));
-				t[0][5].setFicha(new Bishop(COLOR.WHITE, new Coordenada(0,'F'), this));
-				t[0][6].setFicha(new Knight(COLOR.WHITE, new Coordenada(0,'G'), this));
-				t[0][7].setFicha(new Rook(COLOR.WHITE, new Coordenada(0,'H'), this));
+				t[0][0].setFicha(new Rook(COLOR.WHITE, new Coordenada(1,'A'), this));
+				t[0][1].setFicha(new Knight(COLOR.WHITE, new Coordenada(1,'B'), this));
+				t[0][2].setFicha(new Bishop(COLOR.WHITE, new Coordenada(1,'C'), this));
+				t[0][3].setFicha(new Queen(COLOR.WHITE, new Coordenada(1,'D'), this));
+				t[0][4].setFicha(new King(COLOR.WHITE, new Coordenada(1,'E'), this));
+				t[0][5].setFicha(new Bishop(COLOR.WHITE, new Coordenada(1,'F'), this));
+				t[0][6].setFicha(new Knight(COLOR.WHITE, new Coordenada(1,'G'), this));
+				t[0][7].setFicha(new Rook(COLOR.WHITE, new Coordenada(1,'H'), this));
 				for(int i=0; i<8; i++) {
 					int a= 'A' + i;
-					t[1][i].setFicha(new Pawn(COLOR.WHITE, new Coordenada(1, (char) a), this));
+					t[1][i].setFicha(new Pawn(COLOR.WHITE, new Coordenada(2, (char) a), this));
 		
 				}
-				t[7][0].setFicha(new Rook(COLOR.BLACK, new Coordenada(7,'A'), this));
-				t[7][1].setFicha(new Knight(COLOR.BLACK, new Coordenada(7,'B'), this));
-				t[7][2].setFicha(new Bishop(COLOR.BLACK, new Coordenada(7,'C'), this));
-				t[7][3].setFicha(new Queen(COLOR.BLACK, new Coordenada(7,'D'), this));
-				t[7][4].setFicha(new King(COLOR.BLACK, new Coordenada(7,'E'), this));
-				t[7][5].setFicha(new Bishop(COLOR.BLACK, new Coordenada(7,'F'), this));
-				t[7][6].setFicha(new Knight(COLOR.BLACK, new Coordenada(7,'G'), this));
-				t[7][7].setFicha(new Rook(COLOR.BLACK, new Coordenada(7,'H'), this));
+				t[7][0].setFicha(new Rook(COLOR.BLACK, new Coordenada(8,'A'), this));
+				t[7][1].setFicha(new Knight(COLOR.BLACK, new Coordenada(8,'B'), this));
+				t[7][2].setFicha(new Bishop(COLOR.BLACK, new Coordenada(8,'C'), this));
+				t[7][3].setFicha(new Queen(COLOR.BLACK, new Coordenada(8,'D'), this));
+				t[7][4].setFicha(new King(COLOR.BLACK, new Coordenada(8,'E'), this));
+				t[7][5].setFicha(new Bishop(COLOR.BLACK, new Coordenada(8,'F'), this));
+				t[7][6].setFicha(new Knight(COLOR.BLACK, new Coordenada(8,'G'), this));
+				t[7][7].setFicha(new Rook(COLOR.BLACK, new Coordenada(8,'H'), this));
 				for(int i=0; i<8; i++) {
 					int a= 'A' + i;
-				t[6][i].setFicha(new Pawn(COLOR.BLACK , new Coordenada(6, (char) a), this));
+				t[6][i].setFicha(new Pawn(COLOR.BLACK , new Coordenada(7, (char) a), this));
 				}
 				
 			
@@ -63,44 +63,45 @@ public class Tablero {
 		return  Arrays.toString(t);
 	}
 	
-	public void moverFicha(char x1, int y1, char x2, int y2) {
+//	public void moverFicha(char x1, int y1, char x2, int y2) {
+//		
+//		int xOrigen = (int) x1 - 'A';
+//		int xDestino = (int) x2 - 'A';
+//		int yOrigen= y1-1;
+//		int yDestino = y2-1;
+//		
+//		if(comprobarOrigen(yOrigen,xOrigen)==false)
+//			System.out.println("WARNING! En ese origen no se encuentra ninguna ficha");
+//		
+//		else {
+//		
+//		t[yDestino][xDestino].setFicha(t[yOrigen][xDestino].getFicha());
+//		t[yOrigen][xOrigen].deleteFicha();
+//		t[yDestino][xDestino].getFicha().setXY(new Coordenada(yDestino,(char)(xDestino +'A')));
+//		}
+//	}
+	
+ 	public Celda getCelda(Coordenada c) {
 		
-		int xOrigen = (int) x1 - 'A';
-		int xDestino = (int) x2 - 'A';
-		int yOrigen= y1-1;
-		int yDestino = y2-1;
-		
-		if(comprobarOrigen(yOrigen,xOrigen)==false)
-			System.out.println("WARNING! En ese origen no se encuentra ninguna ficha");
-		
-		else {
-		
-		t[yDestino][xDestino].setFicha(t[yOrigen][xDestino].getFicha());
-		t[yOrigen][xOrigen].deleteFicha();
-		t[yDestino][xDestino].getFicha().setXY(new Coordenada(yDestino,(char)(xDestino +'A')));
-		}
+		return t[c.getCoordenadaY()-1][ c.getCoordenadaX()-'A'];
 	}
 	
-	public boolean comprobarOrigen(int yOrigen, int xOrigen) {
+	
+	public boolean contieneCoordenada(Coordenada c) {
 		
-		if(t[yOrigen][xOrigen].getFicha()==null) 
-			
+		
+		if(c.getCoordenadaY()>8 || c.getCoordenadaY()<1)
+			return false;
+		if(c.getCoordenadaX()< 'A' || c.getCoordenadaX()>'H')
 			return false;
 		
-		return true;
+			return true;
 	 
 	}
 		
 
 
-	public Celda[][] getT() {
-		return t;
-	}
 
-
-	public void setT(Celda[][] t) {
-		this.t = t;
-	}
 
 
 	public String  mostrarTableroInicio() {

@@ -1,5 +1,7 @@
 package Fichas;
 
+import java.util.ArrayList;
+
 import principal.Coordenada;
 import principal.Tablero;
 
@@ -58,50 +60,77 @@ public abstract class Fichas {
 		}
 	}
 	
-	private FICHA ficha;
-	private COLOR color;
-	private Coordenada XY;
-	private Tablero t;
+	protected FICHA ficha;
+	protected COLOR color;
+	protected Coordenada posicion;
+	protected Tablero tablero;
+	protected ArrayList<Coordenada> coordenadasPosibles= new ArrayList<Coordenada>();
 	
-
 	public Fichas(COLOR color, Coordenada xY, Tablero t) {
-		super();
+		
 		this.color = color;
-		XY = xY;
-		this.t = t;
+		posicion = xY;
+		this.tablero = t;
 	}
-
-	public Tablero getT() {
-		return t;
-	}
-
-	public void setT(Tablero t) {
-		this.t = t;
-	}
-
-
 	
 	public COLOR getColor() {
 		return color;
 	}
 
+
+
+
 	public void setColor(COLOR color) {
 		this.color = color;
 	}
 
-	public Coordenada getXY() {
-		return XY;
+
+
+
+	public Coordenada getPosicion() {
+		return posicion;
 	}
 
-	public void setXY(Coordenada xY) {
-		XY = xY;
+
+
+
+	public void setPosicion(Coordenada posicion) {
+		this.posicion = posicion;
 	}
-	
-	
-	
+
+
+
+
+	public Tablero getTablero() {
+		return tablero;
+	}
+
+
+
+
+	public void setTablero(Tablero tablero) {
+		this.tablero = tablero;
+	}
+
+
+
+
+	public abstract ArrayList<Coordenada> getCoordenadasPosibles();
+
+
+
+
+	public void setCoordenadasPosibles(ArrayList<Coordenada> coordenadasPosibles) {
+		coordenadasPosibles = coordenadasPosibles;
+	}
+
+
+
+
 	public String toString() {
 		
 		 return ficha.color.toString() +  ficha.toString() + "\u001B[0m";
 	}
+
 	
 }

@@ -8,17 +8,11 @@ import principal.Coordenada;
 import principal.Tablero;
 public class Pawn extends Fichas{
 
-	private COLOR color;
-	private Coordenada XY;
-	private Tablero t1;
-	private ArrayList<Coordenada> CoordenadasPosibles= new ArrayList<Coordenada>();
 	
 	public Pawn(COLOR color, Coordenada XY, Tablero t1) {
 	
 		super(color, XY , t1);
-		this.XY=XY;
-		this.color= color;
-		this.t1=t1;
+		
 					
 	}
 	public String toString() {
@@ -29,24 +23,74 @@ public class Pawn extends Fichas{
 		else
 			 return FICHA.BLACKPAWN.toString();
 	}
-	public void calcularCordenadasPosibles() {
+	
+	//Coordenadas posibles BLANCA
+	public ArrayList<Coordenada> comprobarBlanca() {
 		
-		CoordenadasPosibles.clear();
+		Coordenada pos;
+		//DOWN && DOWN DOWN
+		pos=posicion.down();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) {
+			coordenadasPosibles.add(pos);
+			pos=posicion.down().down();
+			if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null && getPosicion().getCoordenadaY()==2) 
+				coordenadasPosibles.add(pos);
+		}
+			
+		// DOWN RIGHT
+		pos=posicion.down().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor()))
+		coordenadasPosibles.add(pos);
 		
-		if(t1.getT()[XY.up().getCoordenadaY()-1][XY.up().getCoordenadaX()].estaVacio() && !XY.up().equals(null))
-			CoordenadasPosibles.add(XY.up());
+		//DOWN LEFT
+		pos=posicion.down().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor()))
+		coordenadasPosibles.add(pos);
 		
-		if(t1.getT()[XY.up().getCoordenadaY()-1][XY.up().getCoordenadaX()].estaVacio() && !XY.up().equals(null))
-			CoordenadasPosibles.add(XY.up());
+		return coordenadasPosibles;
+			
+
 		
-		//Comprobamos que el movimiento ARRIBA DERECHA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.up().right().getCoordenadaY()-1][XY.up().right().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.up().right().equals(null) && !t1.getT()[XY.up().right().getCoordenadaY()-1][XY.up().right().getCoordenadaX()].estaVacio())
-			CoordenadasPosibles.add(XY.up().right());
-				
-				//Comprobamos que el movimiento ARRIBA IZQUIEDA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.up().left().getCoordenadaY()-1][XY.up().left().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.up().left().equals(null) && !t1.getT()[XY.up().right().getCoordenadaY()-1][XY.up().right().getCoordenadaX()].estaVacio() )
-					CoordenadasPosibles.add(XY.up().left());
+	}	
+	//Coordenadas posibles NEGRA
+	public ArrayList<Coordenada> comprobarNegra() {
+		
+		Coordenada pos;
+		//UP && UP UP
+		pos=posicion.up();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) {
+			coordenadasPosibles.add(pos);
+			pos=pos.up();
+			if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null && posicion.getCoordenadaY()==7) 
+				coordenadasPosibles.add(pos);
+		}
+			
+		// UP RIGHT
+		pos=posicion.up().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor()))
+		coordenadasPosibles.add(pos);
+		
+		//UP LEFT
+		pos=posicion.up().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor()))
+		coordenadasPosibles.add(pos);
+		
+		return coordenadasPosibles;
+		
+		
 	}
+	
+	
+	public ArrayList<Coordenada> getCoordenadasPosibles() {
+		
+		if(ficha.getColor().equals(COLOR.WHITE))
+		return comprobarBlanca();
+		else
+		return comprobarNegra();
+		
+	}
+
+	
 
 	
 }

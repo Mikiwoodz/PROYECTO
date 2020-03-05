@@ -1,6 +1,9 @@
 package principal;
 
+
+
 import Fichas.Fichas;
+import Fichas.Fichas.COLOR;
 
 public class Celda {
 
@@ -32,6 +35,7 @@ public class Celda {
 		
 		if(ficha==null)
 			return true;
+
 		return false;
 	}
 
@@ -44,7 +48,17 @@ public class Celda {
 			
 		return  ficha.toString();
 	}
-	  
+	public boolean comprobarColor(COLOR color) {
+		
+		if(estaVacio())
+			return false;
+		if(ficha.getColor().equals(color))
+			return true;
+		
+		return false;
+		
+		
+	}
 	
 	
 

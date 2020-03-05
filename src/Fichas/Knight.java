@@ -5,23 +5,26 @@ package Fichas;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import Fichas.Fichas.COLOR;
 import principal.Coordenada;
 import principal.Tablero;
 
 public class Knight extends Fichas {
 
-	public COLOR color;
-	private Coordenada XY;
-	private Tablero t1;
-	private ArrayList<Coordenada> CoordenadasPosibles= new ArrayList<Coordenada>();
+//	public COLOR color;
+//	private Coordenada posicion;
+//	private Tablero tablero;
+//	private ArrayList<Coordenada> coordenadasPosibles= new ArrayList<Coordenada>();
 
 
-	public Knight(COLOR color, Coordenada XY, Tablero t1) {
+	public Knight(COLOR color, Coordenada c, Tablero t) {
 	
-		super(color, XY , t1);
-		this.XY=XY;
+		super(color, c , t);
+		this.posicion=c;
 		this.color= color;
-		this.t1=t1;
+		this.tablero=t;
+		
+		this.tablero.getCelda(c).setFicha(this);
 					
 	}
 	public String toString() {
@@ -33,50 +36,159 @@ public class Knight extends Fichas {
 			 return FICHA.BLACKKNIGHT.toString();
 	}
 	
-	public void calcularCoordenadasPosibles(Coordenada Coordenada) {
+	public ArrayList<Coordenada> comprobarBlanca() {
 		
-		int OrigenX= Coordenada.getCoordenadaX() - 'A';
-		int OrigenY= Coordenada.getCoordenadaY();
+		Coordenada pos;
 		
-		CoordenadasPosibles.clear();
-		
-		//Comprobamos que el movimiento ARRIBA ARRIBA DERECHA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.up().up().right().getCoordenadaY()-1][XY.up().up().right().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.up().up().right().equals(null))			
-			CoordenadasPosibles.add(XY.up().up().right());
-		
-		//Comprobamos que el movimiento ARRIBA ARRIBA IZQUIERDA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.up().up().left().getCoordenadaY()-1][XY.up().up().left().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.up().up().left().equals(null))			
-			CoordenadasPosibles.add(XY.up().up().left());
-		
-		//Comprobamos que el movimiento ABAJO ABAJO DERECHA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.down().down().right().getCoordenadaY()-1][XY.down().down().right().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.down().down().right().equals(null))
-			CoordenadasPosibles.add(XY.down().down().right());
-		
-		//Comprobamos que el movimiento ABAJO ABAJO IZQUIERDA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.down().down().left().getCoordenadaY()-1][XY.down().down().left().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.down().down().left().equals(null))
-			CoordenadasPosibles.add(XY.down().down().right());
-		
-		//Comprobamos que el movimiento DERECHA DERECHA ABAJO sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[ XY.right().right().down().getCoordenadaY()-1][ XY.right().right().down().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.right().right().down().equals(null))
-			CoordenadasPosibles.add( XY.right().right().down());
-		
-		//Comprobamos que el movimiento DERECHA DERECHA ARRIBA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[  XY.right().right().up().getCoordenadaY()-1][  XY.right().right().up().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.right().right().up().equals(null))	
-			CoordenadasPosibles.add( XY.right().right().up());
+		// UP UP RIGHT
+		pos=posicion.up().up().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
 
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
 		
-		//Comprobamos que el movimiento IZQUIERDA IZQUIERDA ABAJO sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if(!t1.getT()[XY.left().left().down().getCoordenadaY()-1][XY.left().left().down().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.left().left().down().equals(null))			
-			CoordenadasPosibles.add( XY.right().right().down());
+		// UP UP LEFT
+		pos=posicion.up().up().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
 
-		//Comprobamos que el movimiento IZQUIERDA IZQUIERDA ARRIBA sea posible(Es decir que no haya una ficha de tu mismo color), en caso de que lo sea se guardará en el arraylist
-		if (!t1.getT()[XY.left().left().up().getCoordenadaY()-1][XY.left().left().up().getCoordenadaX()].getFicha().getColor().equals(this.color) && !XY.left().left().up().equals(null))					
-			CoordenadasPosibles.add(XY.left().left().up());
-    
-     
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
 		
+		//DOWN DOWN RIGHT
+		pos=posicion.down().down().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+
+		// DOWN DOWN LEFT
+		pos=posicion.down().down().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// RIGHT RIGHT DOWN
+		pos=posicion.right().right().down();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+
+		// RIGHT RIGHT UP
+		pos=posicion.right().right().up();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// LEFT LEFT DOWN
+		pos=posicion.left().left().down();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// LEFT LEFT UP
+		pos=posicion.left().left().up();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+	
+		return coordenadasPosibles;
 	}
 	
+	  public ArrayList<Coordenada> comprobarNegra() {
+		
+		Coordenada pos;
+		
+		// UP UP RIGHT
+		pos=posicion.up().up().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// UP UP LEFT
+		pos=posicion.up().up().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		//DOWN DOWN RIGHT
+		pos=posicion.down().down().right();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+
+		// DOWN DOWN LEFT
+		pos=posicion.down().down().left();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// RIGHT RIGHT DOWN
+		pos=posicion.right().right().down();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+
+		// RIGHT RIGHT UP
+		pos=posicion.right().right().up();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// LEFT LEFT DOWN
+		pos=posicion.left().left().down();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+		
+		// LEFT LEFT UP
+		pos=posicion.left().left().up();
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
+		coordenadasPosibles.add(pos);
+
+		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
+		coordenadasPosibles.add(pos);
+	
+		return coordenadasPosibles;
+	}
+	
+
+	
+	@Override
+	public ArrayList<Coordenada> getCoordenadasPosibles() {
+		
+		if(ficha.getColor().equals(COLOR.WHITE))
+			return comprobarBlanca();
+			else
+			return comprobarNegra();
+		
+	}
 
 	
 }
