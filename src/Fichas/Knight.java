@@ -107,7 +107,7 @@ public class Knight extends Fichas {
 		return coordenadasPosibles;
 	}
 	
-	  public ArrayList<Coordenada> comprobarNegra() {
+	public ArrayList<Coordenada> comprobarNegra() {
 		
 		Coordenada pos;
 		
