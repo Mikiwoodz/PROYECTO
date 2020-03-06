@@ -53,6 +53,17 @@ public class Coordenada {
 		
 		return new Coordenada(this.y ,(char) (this.x-1) );
 	}
+	public boolean equals(Object o) {
+
+        Coordenada a = (Coordenada) o;
+
+        if(this.x == a.x && this.y == a.y)
+            return true;
+        else
+            return false;
+
+    }
+	
 
 	@Override
 	public String toString() {

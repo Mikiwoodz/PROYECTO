@@ -1,50 +1,38 @@
 package Fichas;
 
-
-
-import java.awt.Color;
 import java.util.ArrayList;
 
 import Fichas.Fichas.COLOR;
-import principal.Coordenada;
-import principal.Tablero;
+import principal.*;
 
 public class Knight extends Fichas {
-
-//	public COLOR color;
-//	private Coordenada posicion;
-//	private Tablero tablero;
-//	private ArrayList<Coordenada> coordenadasPosibles= new ArrayList<Coordenada>();
-
 
 	public Knight(COLOR color, Coordenada c, Tablero t) {
 	
 		super(color, c , t);
-		this.posicion=c;
-		this.color= color;
-		this.tablero=t;
-		
 		this.tablero.getCelda(c).setFicha(this);
 					
 	}
 	public String toString() {
 		
-		if(color.name().equals(COLOR.WHITE)) 
+		if(color.name().equals("WHITE")) 
 			
 			return FICHA.WHITEKNIGHT.toString();
 		else
 			 return FICHA.BLACKKNIGHT.toString();
 	}
 	
+	//Coordinates possibles WHITE
 	public ArrayList<Coordenada> comprobarBlanca() {
 		
 		Coordenada pos;
+		coordenadasPosibles.clear();
 		
 		// UP UP RIGHT
 		pos=posicion.up().up().right();
 		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()!=null && !tablero.getCelda(pos).getFicha().getColor().equals(this.getColor())) 
 		coordenadasPosibles.add(pos);
-
+			
 		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) 
 		coordenadasPosibles.add(pos);
 		
@@ -107,9 +95,11 @@ public class Knight extends Fichas {
 		return coordenadasPosibles;
 	}
 	
+	//Coordinates possibles BLACK
 	public ArrayList<Coordenada> comprobarNegra() {
 		
 		Coordenada pos;
+		coordenadasPosibles.clear();
 		
 		// UP UP RIGHT
 		pos=posicion.up().up().right();
@@ -177,16 +167,16 @@ public class Knight extends Fichas {
 	
 		return coordenadasPosibles;
 	}
-	
+
 
 	
 	@Override
 	public ArrayList<Coordenada> getCoordenadasPosibles() {
 		
-		if(ficha.getColor().equals(COLOR.WHITE))
+		if(color.name().equals("WHITE"))
 			return comprobarBlanca();
 			else
-			return comprobarNegra();
+				return comprobarNegra();
 		
 	}
 

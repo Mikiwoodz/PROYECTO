@@ -17,6 +17,13 @@ public class Celda {
 		
 	}
 	
+	public void colocarFicha(Fichas ficha, Coordenada c) {
+		
+		this.ficha=ficha;
+		this.ficha.setPosicion(c);
+	
+	}
+	
 
 	public Fichas getFicha() {
 		return ficha;

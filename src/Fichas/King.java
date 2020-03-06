@@ -3,34 +3,34 @@ package Fichas;
 import java.util.ArrayList;
 
 import Fichas.Fichas.COLOR;
-import principal.Coordenada;
-import principal.Tablero;
+
+import principal.*;
 
 public class King extends Fichas {
 
-
-
-	public King(COLOR color, Coordenada c, Tablero t1) {
+	public King(COLOR color, Coordenada c, Tablero t) {
 	
-		super(color, c , t1);
-	
+		super(color, c , t);
+		this.posicion=c;
 		this.tablero.getCelda(c).setFicha(this);
 					
 	}
+	
 	public String toString() {
 		
-		if(color.name().equals(COLOR.WHITE)) 
+		if(color.name().equals(COLOR.WHITE))
 			
-			return FICHA.WHITEKING.toString();
+			return ficha.WHITEKING.toString();
 		else
-			 return FICHA.BLACKKING.toString();
+			 return ficha.BLACKKING.toString();
 	}	
 	
-	//Coordenadas posibles NEGRA
+	//Coordinates possibles BLACK
 	public ArrayList<Coordenada> comprobarNegra() {
 		
 
 		Coordenada pos;
+		coordenadasPosibles.clear();
 		
 		// DOWN
 		pos=posicion.down();
@@ -107,11 +107,13 @@ public class King extends Fichas {
 
 		
 	}
-	//Coordenadas posibles BLANCA
+	
+	//Coordinates possibles WHITE
 	public ArrayList<Coordenada> comprobarBlanca() {
 		
 
 		Coordenada pos;
+		coordenadasPosibles.clear();
 		
 		// DOWN
 		pos=posicion.down();
@@ -192,13 +194,28 @@ public class King extends Fichas {
 	
 	public ArrayList<Coordenada> getCoordenadasPosibles() {
 		
-		if(ficha.getColor().equals(COLOR.WHITE))
+		if(color.name().equals("WHITE"))
+			
 			return comprobarBlanca();
+		
 			else
-			return comprobarNegra();
+				
+				return comprobarNegra();
 		
 	}
 	
-	
+	public void getPosicion(Coordenada c) {
+
+		this.posicion=c;
+		if (this.color.equals(COLOR.WHITE)) {
+
+			this.tablero.whiteKingPos=this.posicion;
+			
+		} else {
+			this.tablero.blackKingPos=this.posicion;
+		}
+		
 	  
+	}
+	
 }

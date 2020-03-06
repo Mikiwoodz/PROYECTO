@@ -1,22 +1,53 @@
 package principal;
 
+import java.util.Scanner;
+
 import Fichas.*;
 import Fichas.Fichas.COLOR;
 
 public class Test {
 
 	public static void main(String[] args) {
-	
+		
+		Scanner sc= new Scanner(System.in);
 		Tablero t1= new Tablero();
 		
-		System.out.println(t1.mostrarTableroInicio());
+
+		int option;
+		menuPrincipal();
+		do {
+			
+			option=sc.nextInt();
+			switch(option) {
+			case 0: System.out.println("ADIOS");
+				
+				break;
+			case 1: t1.empezarAJugar();
+				break;
+			default: System.out.println("Introduce otra opcion");
+			 	break;
+			
+			
+			}
 		
-		Pawn k1= new Pawn(COLOR.BLACK, new Coordenada(7, 'B'), t1);
+			
+			
+		}while(option!=0);
+			
 		
-		
-		//t1.moverFicha('A', 7, 'A', 1);
-		//System.out.println(t1.mostrarTableroInicio());
-		//t1.moverFicha('A', 1, 'B', 1);
-		//System.out.println(t1.mostrarTableroInicio());
 	}
+	
+	public static void menuPrincipal() {
+		
+		System.out.println("----------BIENVENIDO AL AJEDREZ-----------");
+		System.out.println(" ");
+		System.out.println("----------------1. JUGAR------------------");
+		System.out.println("----------------0. Salir------------------");
+		
+		
+	}
+	
+
+
+
 }

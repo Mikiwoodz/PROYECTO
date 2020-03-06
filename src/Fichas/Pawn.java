@@ -1,40 +1,40 @@
 package Fichas;
 
-
 import java.util.ArrayList;
 
 import Fichas.Fichas.COLOR;
-import principal.Coordenada;
-import principal.Tablero;
+import principal.*;
+
 public class Pawn extends Fichas{
 
+	public Pawn(COLOR color, Coordenada c, Tablero t) {
 	
-	public Pawn(COLOR color, Coordenada XY, Tablero t1) {
-	
-		super(color, XY , t1);
-		
+		super(color, c , t);
+		this.tablero.getCelda(c).setFicha(this);
 					
 	}
 	public String toString() {
 		
-		if(color.name().equals(COLOR.WHITE)) 
+		if(color.name().equals("WHITE")) 
 			
 			return FICHA.WHITEPAWN.toString();
 		else
 			 return FICHA.BLACKPAWN.toString();
 	}
 	
-	//Coordenadas posibles BLANCA
+	//Coordinates possibles WHITE
 	public ArrayList<Coordenada> comprobarBlanca() {
 		
 		Coordenada pos;
+		coordenadasPosibles.clear();
+		
 		//DOWN && DOWN DOWN
 		pos=posicion.down();
 		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) {
 			coordenadasPosibles.add(pos);
 			pos=posicion.down().down();
 			if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null && getPosicion().getCoordenadaY()==2) 
-				coordenadasPosibles.add(pos);
+			coordenadasPosibles.add(pos);
 		}
 			
 		// DOWN RIGHT
@@ -52,10 +52,13 @@ public class Pawn extends Fichas{
 
 		
 	}	
-	//Coordenadas posibles NEGRA
+
+	//Coordinates possibles BLACK
 	public ArrayList<Coordenada> comprobarNegra() {
 		
 		Coordenada pos;
+		coordenadasPosibles.clear();
+		
 		//UP && UP UP
 		pos=posicion.up();
 		if(tablero.contieneCoordenada(pos) && tablero.getCelda(pos).getFicha()==null) {
@@ -83,10 +86,10 @@ public class Pawn extends Fichas{
 	
 	public ArrayList<Coordenada> getCoordenadasPosibles() {
 		
-		if(ficha.getColor().equals(COLOR.WHITE))
-		return comprobarBlanca();
-		else
-		return comprobarNegra();
+		if(color.name().equals("WHITE"))
+			return comprobarBlanca();
+			else
+				return comprobarNegra();
 		
 	}
 
